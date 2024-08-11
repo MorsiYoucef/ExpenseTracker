@@ -1,22 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Stat from './components/stat';
+import Recent from './screens/Recent'
+import Expenses from './screens/Expenses'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
+
+const Tab = createBottomTabNavigator()
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello! world</Text>
-      <Stat />
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: { height: 70 }, // Adjust the height as needed
+        }}
+      >
+        <Tab.Screen
+          name="Recent"
+          component={Recent}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <MaterialCommunityIcons
+                  name="timer-sand"
+                  size={30}
+                  color={focused ? 'blue' : 'gray'}
+                />
+              )
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Expenses"
+          component={Expenses}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              return (
+                <MaterialCommunityIcons
+                  name="calendar-month-outline"
+                  size={30}
+                  color={focused ? 'blue' : 'gray'}
+                />
+              )
+            },
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+

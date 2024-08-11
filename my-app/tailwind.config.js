@@ -6,7 +6,14 @@ module.exports = {
     './screens/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        myBlue_300: '#214177',
+        myBlue_200: '#3667A6',
+        myBlue_100: '#82A6CB',
+        myBlue: '#BDD8F1',
+      },
+    },
   },
   plugins: [],
 }
