@@ -1,4 +1,5 @@
 {
+  
   "expo": {
     "name": "my-app",
     "displayName": "my-app",
@@ -26,3 +27,5 @@
     }
   }
 }
+
+
