@@ -1,36 +1,28 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Button } from 'react-native'
+import React, { useRef } from 'react'
 import Modal from 'react-native-modalbox'
-import { Dimensions } from'react-native'
+import { Dimensions } from 'react-native'
 
 var screen = Dimensions.get('window')
-export default class ModalBox extends React.Component {
-    constructor() {
-    super()
-    this.state = {
-      isOpen: false,
-      isDisabled: false,
-      swipeToClose: true,
-      sliderValue: 0.3,
-    }
-  }
+export default function ModalBox() {
+  const modalRef = useRef()
 
-  onClose() {
+  const onClose = () => {
     console.log('Modal just closed')
   }
 
-  onOpen() {
+  const onOpen = () => {
     console.log('Modal just opened')
   }
 
-  onClosingState(state) {
+  const onClosingState = (state) => {
     console.log('the open/close of the swipeToClose just changed')
   }
 
-  renderList() {
-    var list = []
+  const renderList = () => {
+    const list = []
 
-    for (var i = 0; i < 50; i++) {
+    for (let i = 0; i < 50; i++) {
       list.push(
         <Text style={styles.text} key={i}>
           Elem {i}
@@ -41,39 +33,25 @@ export default class ModalBox extends React.Component {
     return list
   }
 
-  render() {
-    var BContent = (
-      <View style={[styles.btn, styles.btnModal]}>
-        <Button
-          title="X"
-          color="white"
-          onPress={() => this.setState({ isOpen: false })}
-        />
-      </View>
-    )
   return (
     <Modal
       style={[styles.modal, styles.modal]}
-      ref={'modal1'}
-      swipeToClose={this.state.swipeToClose}
-      onClosed={this.onClose}
-      onOpened={this.onOpen}
-      onClosingState={this.onClosingState}
+      ref={modalRef}
+      swipeToClose={true}
+      onClosed={onClose}
+      onOpened={onOpen}
+      onClosingState={onClosingState}
     >
       <Text style={styles.text}>Basic modal</Text>
       <Button
-        title={`Disable swipeToClose(${
-          this.state.swipeToClose ? 'true' : 'false'
-        })`}
-        onPress={() =>
-          this.setState({ swipeToClose: !this.state.swipeToClose })
-        }
+        title={`Disable swipeToClose(${true ? 'true' : 'false'})`}
+        onPress={() => modalRef.current?.setSwipeToClose(!true)}
         style={styles.btn}
       />
     </Modal>
   )
 }
-}
+
 const styles = StyleSheet.create({
   wrapper: {
     paddingTop: 50,
