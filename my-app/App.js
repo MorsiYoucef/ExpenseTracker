@@ -7,8 +7,11 @@ import { TouchableOpacity, StyleSheet, Text,Button } from 'react-native'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import Modal from 'react-native-modalbox'
 import React, { useState, useRef, forwardRef } from 'react'
+import { Dimensions } from 'react-native'
+import Octicons from '@expo/vector-icons/Octicons'
 
 const Tab = createBottomTabNavigator()
+const { width, height } = Dimensions.get('window')
 
 
 
@@ -86,12 +89,14 @@ export default function App() {
         style={[styles.modal]}
         ref={modalRef}
         swipeToClose={true}
-        onClosed={openModal}
-        onOpened={closeModal}
+        onClosed={closeModal}
+        onOpened={openModal}
         onClosingState={false}
         isOpen={isModalVisible}
         isDisabled={false}
+        position="bottom"
       >
+        <Octicons name="triangle-down" size={50} color="black" />
         <Text style={styles.text}>Basic modal</Text>
       </Modal>
     </NavigationContainer>
@@ -104,42 +109,12 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     flex: 1,
   },
-
   modal: {
-    justifyContent: 'center',
+    justifyContent: 'start',
     alignItems: 'center',
+    height: height * 0.94,
+    
   },
-
-  modal2: {
-    height: 230,
-    backgroundColor: '#3B5998',
-  },
-
-  modal3: {
-    height: 300,
-    width: 300,
-  },
-
-  modal4: {
-    height: 300,
-  },
-
-  btn: {
-    margin: 10,
-    backgroundColor: '#3B5998',
-    color: 'white',
-    padding: 10,
-  },
-
-  btnModal: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    width: 50,
-    height: 50,
-    backgroundColor: 'transparent',
-  },
-
   text: {
     color: 'black',
     fontSize: 22,
