@@ -91,7 +91,6 @@ export default function App() {
         swipeToClose={true}
         onClosed={closeModal}
         onOpened={openModal}
-        onClosingState={false}
         isOpen={isModalVisible}
         isDisabled={false}
         position="bottom"
