@@ -9,6 +9,7 @@ import Modal from 'react-native-modalbox'
 import React, { useState, useRef, forwardRef } from 'react'
 import { Dimensions } from 'react-native'
 import Octicons from '@expo/vector-icons/Octicons'
+import ModalMangement from './components/ModalMangement'
 
 const Tab = createBottomTabNavigator()
 const { width, height } = Dimensions.get('window')
@@ -17,6 +18,7 @@ const { width, height } = Dimensions.get('window')
 
 export default function App() {
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const [varupdate, setUpdate] = useState(false)
   const modalRef = useRef()
 
   const openModal = () => {
@@ -25,6 +27,11 @@ export default function App() {
 
   const closeModal = () => {
     setIsModalVisible(false)
+  }
+
+  const update = () => {
+    setUpdate(false)
+
   }
 
   return (
@@ -96,7 +103,7 @@ export default function App() {
         position="bottom"
       >
         <Octicons name="triangle-down" size={50} color="black" />
-        <Text style={styles.text}>Basic modal</Text>
+        <ModalMangement update={varupdate} add={isModalVisible} />
       </Modal>
     </NavigationContainer>
   )
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
   modal: {
     justifyContent: 'start',
     alignItems: 'center',
-    height: height * 0.94,
+    height: height * 0.935,
     
   },
   text: {
