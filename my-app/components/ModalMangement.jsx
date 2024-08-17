@@ -5,10 +5,12 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native'
-import React,{useState} from 'react'
+import React, { useState, createContext } from 'react'
 import Expenses from '../modal/expenses'
 
-const ModalMangement = ({ update, add,onAddExpense }) => {
+export const ExpensesContext = createContext()
+
+const ModalMangement = ({ update, add }) => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
   const expensesArray = []
@@ -16,12 +18,13 @@ const ModalMangement = ({ update, add,onAddExpense }) => {
 
   const handleAdd = () => {
     const newExpense = new Expenses(
-      '1',
-      'Groceries',
-      120,
-      new Date('2024-01-01')
+      Math.random().toString(36).substr(2, 9),
+      title,
+      parseFloat(price),
+      new Date()
     )
     expensesArray.push(newExpense)
+    console.log(expensesArray)
     
   }
   return (
