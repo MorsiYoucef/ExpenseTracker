@@ -6,14 +6,23 @@ import {
   TextInput,
 } from 'react-native'
 import React,{useState} from 'react'
+import Expenses from '../modal/expenses'
 
-const ModalMangement = ({ update, add }) => {
+const ModalMangement = ({ update, add,onAddExpense }) => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
+  const expensesArray = []
+  
 
   const handleAdd = () => {
-    // Logic to add the item to the list
-    console.log('Title:', title, 'Price:', price)
+    const newExpense = new Expenses(
+      '1',
+      'Groceries',
+      120,
+      new Date('2024-01-01')
+    )
+    expensesArray.push(newExpense)
+    
   }
   return (
     <View>

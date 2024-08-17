@@ -19,6 +19,7 @@ const { width, height } = Dimensions.get('window')
 export default function App() {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [varupdate, setUpdate] = useState(false)
+  const [expenses, setExpenses] = useState([])
   const modalRef = useRef()
 
   const openModal = () => {
@@ -32,6 +33,11 @@ export default function App() {
   const update = () => {
     setUpdate(false)
 
+  }
+  
+
+  const handleAddExpense = (newExpense) => {
+    setExpenses((currentExpenses) => [...currentExpenses, newExpense])
   }
 
   return (
@@ -78,6 +84,7 @@ export default function App() {
         <Tab.Screen
           name="Expenses"
           component={Expenses}
+          expenses={expenses}
           options={{
             tabBarIcon: ({ focused }) => {
               return (
@@ -103,7 +110,11 @@ export default function App() {
         position="bottom"
       >
         <Octicons name="triangle-down" size={50} color="black" />
-        <ModalMangement update={varupdate} add={isModalVisible} />
+        <ModalMangement
+          update={varupdate}
+          add={isModalVisible}
+          onAddExpense={handleAddExpense}
+        />
       </Modal>
     </NavigationContainer>
   )
