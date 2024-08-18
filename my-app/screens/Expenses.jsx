@@ -6,10 +6,14 @@ import { ExpensesContext } from '../store/context/ExpensesContext'
 const Expenses = () => {
   const expensesCtx = useContext(ExpensesContext)
   const total = expensesCtx.expenses.reduce((acc, curr) => acc + curr.price, 0)
+
+  const openModal = () => {
+
+  }
   function renderExpenseItem(itemData) {
     return (
       <View className=' flex items-center mt-5'>
-        <ExpenseItem title={itemData.item.title} price={itemData.item.price} />
+        <ExpenseItem openModal={openModal} title={itemData.item.title} price={itemData.item.price} />
       </View>
     )
   }

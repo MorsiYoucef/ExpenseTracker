@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import React, { useState, createContext } from 'react'
 import Expenses from '../modal/expenses'
+import AntDesign from '@expo/vector-icons/AntDesign'
 
 export const ExpensesContext = createContext()
 
@@ -29,7 +30,11 @@ const ModalMangement = ({ update, add }) => {
   }
   return (
     <View>
-      {update && <Text>Update Mode</Text>}
+      {update && (
+        <TouchableOpacity>
+          <AntDesign name="delete" size={24} color="black" />
+        </TouchableOpacity>
+      )}
       {add && (
         <View className="flex flex-row gap-5">
           <View className="flex flex-col gap-5">
