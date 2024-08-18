@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
-import { EXPENSES } from './../data/ExpensesData'
+import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native'
 import ExpenseItem from '../components/ExpenseItem'
+import { useContext } from 'react'
+import { ExpensesContext } from '../store/context/ExpensesContext'
 
 const Expenses = () => {
-  const total = EXPENSES.reduce((sum, expense) => sum + expense.price, 0)
+  const expensesCtx = useContext(ExpensesContext)
+  const total = expensesCtx.expenses.reduce((acc, curr) => acc + curr.price, 0)
   function renderExpenseItem(itemData) {
     return (
       <View className=' flex items-center mt-5'>
@@ -13,20 +15,46 @@ const Expenses = () => {
   }
 
   return (
-    <View className=" flex items-center mt-5">
-      <View className="flex flex-row items-center justify-between bg-myBlue p-2 w-[90%] rounded-xl">
-        <Text className=" text-myBlue_300 font-bold text-sm">Total</Text>
-        <Text className=" text-red-500 font-bold text-xl">{total}</Text>
-      </View>
-      <FlatList
-        data={EXPENSES}
-        keyExtractor={(item) => item.id}
-        renderItem={renderExpenseItem}
-      />
-    </View>
+    <FlatList
+      data={expensesCtx.expenses}
+      keyExtractor={(item) => item.id}
+      renderItem={renderExpenseItem}
+      ListHeaderComponent={
+        <View style={styles.header}>
+          <Text style={styles.headerText}>Total</Text>
+          <Text style={styles.totalAmount}>{total}</Text>
+        </View>
+      }
+      contentContainerStyle={styles.flatListContent}
+    />
   )
 }
 
 export default Expenses
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  flatListContent: {
+    alignItems: 'center',
+    marginTop: 5,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#3667A6', // Replace with your color
+    padding: 10,
+
+    width: '90%',
+    borderRadius: 10,
+  },
+  headerText: {
+    color: '#BDD8F1', // Replace with your color
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  totalAmount: {
+    color: '#ff0000', // Replace with your color
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+})
