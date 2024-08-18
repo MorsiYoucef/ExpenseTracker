@@ -31,6 +31,10 @@ export default function App() {
     setIsModalVisible(true)
   }
 
+  const updateModal = () => {
+    setIsModalVisible(true)
+  }
+
   const closeModal = () => {
     setIsModalVisible(false)
   }
@@ -89,7 +93,6 @@ export default function App() {
             />
             <Tab.Screen
               name="Expenses"
-              component={Expenses}
               expenses={expenses}
               options={{
                 tabBarIcon: ({ focused }) => {
@@ -103,7 +106,9 @@ export default function App() {
                 },
                 title: 'All Expenses',
               }}
-            />
+            >
+              {() => <Expenses updateModal={updateModal} />}
+            </Tab.Screen>
           </Tab.Navigator>
           <Modal
             style={[styles.modal]}
