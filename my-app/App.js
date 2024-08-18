@@ -61,7 +61,7 @@ export default function App() {
               },
               headerTintColor: '#fff',
               headerRight: () => (
-                <TouchableOpacity onPress={openModal}>
+                <TouchableOpacity onPress={updateModal}>
                   <FontAwesome5
                     name="plus"
                     size={24}
@@ -115,7 +115,7 @@ export default function App() {
             ref={modalRef}
             swipeToClose={true}
             onClosed={closeModal}
-            onOpened={openModal}
+            onOpened={updateModal}
             isOpen={isModalVisible}
             isDisabled={false}
             position="bottom"
