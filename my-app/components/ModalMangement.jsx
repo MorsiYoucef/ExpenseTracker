@@ -28,12 +28,11 @@ const ModalMangement = ({  add, isModal  }) => {
   }
   return (
     <View>
-      {isModal && (
+      {isModal ? (
         <TouchableOpacity>
           <AntDesign name="delete" size={24} color="black" />
         </TouchableOpacity>
-      )}
-      {add && (
+      ) : (
         <View className="flex flex-row gap-5">
           <View className="flex flex-col gap-5">
             <TextInput

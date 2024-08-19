@@ -23,7 +23,7 @@ const { width, height } = Dimensions.get('window')
 
 export default function App() {
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [varupdate, setUpdate] = useState(false)
+  const [isupdate, setUpdate] = useState(false)
   const [expenses, setExpenses] = useState([])
   const [isModal, setIsModal] = useState(false)
   const modalRef = useRef()
@@ -32,14 +32,14 @@ export default function App() {
     setIsModalVisible(true)
   }
 
-  const updateModal = () => {
+  const updateModal = (isUpdate = false) => {
     setIsModalVisible(true)
-    setIsModal(true)
-
+    setIsModal(isUpdate)
   }
 
   const closeModal = () => {
     setIsModalVisible(false)
+    setIsModal(false)
   }
 
   const update = () => {
@@ -64,7 +64,7 @@ export default function App() {
               },
               headerTintColor: '#fff',
               headerRight: () => (
-                <TouchableOpacity onPress={updateModal}>
+                <TouchableOpacity onPress={() => updateModal(false)}>
                   <FontAwesome5
                     name="plus"
                     size={24}
@@ -110,7 +110,12 @@ export default function App() {
                 title: 'All Expenses',
               }}
             >
-              {() => <Expenses updateModal={updateModal} isModal={isModal} />}
+              {() => (
+                <Expenses
+                  updateModal={() => updateModal(true)}
+                  isModal={isModal}
+                />
+              )}
             </Tab.Screen>
           </Tab.Navigator>
           <Modal
@@ -118,14 +123,13 @@ export default function App() {
             ref={modalRef}
             swipeToClose={true}
             onClosed={closeModal}
-            onOpened={updateModal}
             isOpen={isModalVisible}
             isDisabled={false}
             position="bottom"
           >
             <Octicons name="triangle-down" size={50} color="black" />
             <ModalMangement
-              update={varupdate}
+              update={isupdate}
               add={isModalVisible}
               onAddExpense={handleAddExpense}
               isModal={isModal}
