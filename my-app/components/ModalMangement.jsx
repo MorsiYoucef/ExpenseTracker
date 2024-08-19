@@ -5,17 +5,18 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native'
-import React, { useState, createContext } from 'react'
+import React, { useState, createContext, useContext } from 'react'
 import Expenses from '../modal/expenses'
 import AntDesign from '@expo/vector-icons/AntDesign'
+import { ExpensesContext } from '../store/context/ExpensesContext'
 
-export const ExpensesContext = createContext()
 
-const ModalMangement = ({  add, isModal  }) => {
+const ModalMangement = ({   isModal,expenseId  }) => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
-  const expensesArray = []
+  const expensesCtx = useContext(ExpensesContext);
 
+  
   const handleAdd = () => {
     const newExpense = new Expenses(
       Math.random().toString(36).substr(2, 9),
@@ -26,10 +27,13 @@ const ModalMangement = ({  add, isModal  }) => {
     expensesArray.push(newExpense)
     console.log(expensesArray)
   }
+  const handleDelete = () => {
+    expensesCtx.deleteExpense(expenseId)
+  }
   return (
     <View>
       {isModal ? (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleDelete}>
           <AntDesign name="delete" size={24} color="black" />
         </TouchableOpacity>
       ) : (
