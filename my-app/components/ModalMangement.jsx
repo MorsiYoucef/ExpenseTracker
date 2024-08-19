@@ -11,11 +11,10 @@ import AntDesign from '@expo/vector-icons/AntDesign'
 
 export const ExpensesContext = createContext()
 
-const ModalMangement = ({ update, add }) => {
+const ModalMangement = ({  add, isModal  }) => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
   const expensesArray = []
-  
 
   const handleAdd = () => {
     const newExpense = new Expenses(
@@ -26,11 +25,10 @@ const ModalMangement = ({ update, add }) => {
     )
     expensesArray.push(newExpense)
     console.log(expensesArray)
-    
   }
   return (
     <View>
-      {update && (
+      {isModal && (
         <TouchableOpacity>
           <AntDesign name="delete" size={24} color="black" />
         </TouchableOpacity>

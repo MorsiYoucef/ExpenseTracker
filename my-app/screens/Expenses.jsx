@@ -3,7 +3,7 @@ import ExpenseItem from '../components/ExpenseItem'
 import { useContext } from 'react'
 import { ExpensesContext } from '../store/context/ExpensesContext'
 
-const Expenses = ({ updateModal }) => {
+const Expenses = ({ updateModal, isModal }) => {
   const expensesCtx = useContext(ExpensesContext)
   const total = expensesCtx.expenses.reduce((acc, curr) => acc + curr.price, 0)
 
@@ -16,6 +16,7 @@ const Expenses = ({ updateModal }) => {
           title={itemData.item.title}
           price={itemData.item.price}
           updateModal={updateModal}
+          
         />
       </View>
     )

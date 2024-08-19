@@ -25,6 +25,7 @@ export default function App() {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [varupdate, setUpdate] = useState(false)
   const [expenses, setExpenses] = useState([])
+  const [isModal, setIsModal] = useState(false)
   const modalRef = useRef()
 
   const openModal = () => {
@@ -33,6 +34,8 @@ export default function App() {
 
   const updateModal = () => {
     setIsModalVisible(true)
+    setIsModal(true)
+
   }
 
   const closeModal = () => {
@@ -107,7 +110,7 @@ export default function App() {
                 title: 'All Expenses',
               }}
             >
-              {() => <Expenses updateModal={updateModal} />}
+              {() => <Expenses updateModal={updateModal} isModal={isModal} />}
             </Tab.Screen>
           </Tab.Navigator>
           <Modal
@@ -125,6 +128,7 @@ export default function App() {
               update={varupdate}
               add={isModalVisible}
               onAddExpense={handleAddExpense}
+              isModal={isModal}
             />
           </Modal>
         </NavigationContainer>
