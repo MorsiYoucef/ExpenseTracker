@@ -23,7 +23,7 @@ const Recent = () => {
   return (
     <FlatList
       data={recentExpenses}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.id.toString()}
       renderItem={renderExpenseItem}
       ListHeaderComponent={
         <View style={styles.header}>
