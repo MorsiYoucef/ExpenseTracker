@@ -14,18 +14,13 @@ import { ExpensesContext } from '../store/context/ExpensesContext'
 const ModalMangement = ({   isModal,expenseId  }) => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
+  const [date, setDate] = useState(new Date())
   const expensesCtx = useContext(ExpensesContext);
 
   
   const handleAdd = () => {
-    const newExpense = new Expenses(
-      Math.random().toString(36).substr(2, 9),
-      title,
-      parseFloat(price),
-      new Date()
-    )
-    expensesArray.push(newExpense)
-    console.log(expensesArray)
+    expensesCtx.addExpense(title, price, date)
+    console.log(title, price,date)
   }
   const handleDelete = () => {
     expensesCtx.deleteExpense(expenseId)
@@ -51,6 +46,12 @@ const ModalMangement = ({   isModal,expenseId  }) => {
               onChangeText={setPrice}
               keyboardType="numeric"
               className="border p-2"
+            />
+            <TextInput
+              placeholder="YYYY-MM-DD"
+              value={date}
+              onChangeText={setDate}
+              className="border p-2" 
             />
             <View className="flex flex-row gap-5">
               <TouchableOpacity className=" bg-myBlue_200 p-2">
